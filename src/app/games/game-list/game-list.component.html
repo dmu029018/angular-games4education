@@ -1,0 +1,11 @@
+<!--TODO: binding de datos-->
+<section class="game-list">
+  <article class="game-short" *ngFor="let g of games">
+    <h3>{{ g.name }}</h3>
+    <p>Game description blablabla...</p>
+    <div class="btn-group">
+      <a routerLink="/games/{{g.id}}" class="btn btn-info">View info</a>
+      <a routerLink="/games/{{g.id}}/play" class="btn btn-success">Play</a>
+    </div>
+  </article>
+</section>
