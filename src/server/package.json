@@ -1,0 +1,16 @@
+{
+  "name": "json-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "json-server-auth": "^1.2.1"
+  },
+  "scripts": {
+    "start":  "json-server db.json -m ./node_modules/json-server-auth",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
