@@ -39,6 +39,7 @@ export class AuthService {
       {name, email, password},
       {headers: this.headers}
     );
+    console.log("response generated");
     return response.pipe(tap(data => {
       return data;
     }, catchError(error => {

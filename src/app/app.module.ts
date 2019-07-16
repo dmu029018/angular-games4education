@@ -8,6 +8,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AuthService } from './shared/services/auth.service';
 import { ApiService } from './shared/services/api.service';
 import { FormBuilder } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 @NgModule({
   declarations: [
@@ -17,7 +19,8 @@ import { FormBuilder } from '@angular/forms';
     BrowserModule,
     AppRoutingModule,
     CommonsModule,
-    HttpClientModule
+    HttpClientModule,
+    BrowserAnimationsModule
   ],
   providers: [
     AuthService,

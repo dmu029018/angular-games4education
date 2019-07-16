@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, SelectControlValueAccessor } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router } from '@angular/router';
 
@@ -16,10 +16,10 @@ export class RegisterComponent implements OnInit {
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
 
     this.registerForm = this.fb.group({
-        username: ['', [Validators.required]],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required]],
-        confirmPassword: ['']
+        confirmPassword: ['', [Validators.required]],
+        nickname: ['', [Validators.required, Validators.minLength(3)]]
       });
 
   }
@@ -52,8 +52,8 @@ export class RegisterComponent implements OnInit {
   /**
    * Getter para nombre de usuario
    */
-  get username() {
-    return this.registerForm.get('confirmPassword');
+  get nickname() {
+    return this.registerForm.get('nickname');
   }
 
   /**
@@ -61,10 +61,17 @@ export class RegisterComponent implements OnInit {
    */
   onSubmit() {
     console.log(this.registerForm.value);
-    const userObs = this.authService.registerUser(this.username.value, this.email.value, this.password.value);
+    if (this.registerForm.invalid || this.password !== this.confirmPassword) {
+      // Error de datos.
+      this.onIsError();
+      return;
+    }
+    // Datos form correctos
+    const userObs = this.authService.registerUser(this.nickname.value, this.email.value, this.password.value);
     return userObs.subscribe(
         data => {
           // Éxito al enviar
+          alert("success");
           const token = data.accessToken;
           this.authService.setToken(token);
           this.router.onSameUrlNavigation = 'reload';

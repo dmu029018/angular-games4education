@@ -1,3 +1,22 @@
+<!--ERROR-->
+<ng-container *ngIf="isError">
+  <div class="card">
+    <div class="card-header">
+      Ooops! Form data error!
+    </div>
+    <div class="card-body">
+        <p>Oops! It seems form data is wrong:</p>
+        <ul>
+          <li>Email field must be a valid email (you know: xxxx...@xxx.xxx)</li>
+          <li>Password field must be... yeah, it must simply be</li>
+          <li>Confirm password field must be present and its value must match the password one</li>
+          <li>Nickname field must be and have a minimum of 3 characters.</li>
+        </ul>
+    </div>
+  </div>
+</ng-container>
+
+<!--FORM-->
 <div class="card">
   <div class="card-header">
       <app-header title="Register"></app-header>
@@ -6,18 +25,18 @@
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="email">Email</label>
-        <input class="form-control" #email placeholder="Your user email" type="email" [formControl]="registerForm.get('email')"/>
+        <input class="form-control" #email placeholder="Your user email (nobody would know it... NEVER!!!)" type="email" [formControl]="registerForm.get('email')"/>
       </div>
       <div class="form-group">
-        <label for="username">Username</label>
-        <input class="form-control" #username placeholder="Your username" type="text" [formControl]="registerForm.get('username')"/>
+        <label for="nickname">Nickname</label>
+        <input class="form-control" #nickname placeholder="Your nickname (it shows to other users)" type="text" [formControl]="registerForm.get('nickname')"/>
       </div>
       <div class="form-group">
         <label for="password">Password</label>
         <input class="form-control" #password placeholder="Your password" type="password" [formControl]="registerForm.get('password')"/>
       </div>
       <div class="form-group">
-        <label for="passwordconfirm">Password confirm</label>
+        <label for="passwordconfirm">Confirm Password</label>
         <input class="form-control" #passwordconfirm placeholder="Your password (confirm)" type="password" [formControl]="registerForm.get('confirmPassword')"/>
       </div>
       <div class="btn-group">

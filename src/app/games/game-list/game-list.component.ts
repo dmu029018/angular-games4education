@@ -20,4 +20,5 @@ export class GameListComponent implements OnInit {
     this.games = this.api.getGames$();
   }
 
+
 }

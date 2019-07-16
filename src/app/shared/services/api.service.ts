@@ -9,11 +9,21 @@ import { Game } from '../classes/game';
 })
 export class ApiService {
 
+
   constructor(private http: HttpClient) { }
 
   getGames$(): Game[] {
     // Por ahora importaremos del mock data, pero se hará con una API
     return GAMES;
+  }
+
+  findGameById(identifier: string): Game {
+    for (let g of GAMES) {
+      if (g.id === identifier) {
+        return g;
+      }
+    }
+    return null;
   }
 
 }

@@ -1,4 +1,5 @@
 
+<!--ERROR-->
 <ng-container *ngIf="isError">
   <div class="card">
     <div class="card-header">
@@ -7,13 +8,13 @@
     <div class="card-body">
         <p>Oops! It seems form data is wrong:</p>
         <ul>
-          <li>Email field must be a valid email (you know: xxxx...@xxx.xxx)</li>
-          <li>Password field must be... yeah, it must simply be</li>
+          <li *ngIf="email.invalid">Email field must be a valid email (you know: xxxx...@xxx.xxx)</li>
+          <li *ngIf="password.invalid">Password field must be... yeah, it must simply be</li>
         </ul>
     </div>
   </div>
 </ng-container>
-
+<!--FORM-->
 <div class="card">
   <div class="card-header">
       <app-header title="Login"></app-header>
