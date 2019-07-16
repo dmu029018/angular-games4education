@@ -4,11 +4,22 @@
 -->
 <app-header [title]="'Home'"></app-header>
 <!--Si no logueado:-->
-<div class="jumbotron text-center">
-  <h1  class="page-header">Welcome to games4education!!</h1>
+<div class="jumbotron text-center" *ngIf="!userIsLogged">
+  <h1  class="page-header">Welcome to <app-brand></app-brand>!!</h1>
   <p>The platform transforming the education in a game!</p>
-  <p>Consider to sign up in order to enjoy it! It's free!!</p>
-  <a class="btn btn-info">Join to the party</a>
-  <p>Or you already have an user?</p>
-  <a class="btn btn-info">Let's connect!</a>
+  <p>Consider to register in order to enjoy it! It's free!!</p>
+  <a class="btn btn-info" [routerLink]="['/register']">Register</a>
+  <p>Or you already have an user? Then let's connect!!</p>
+  <a class="btn btn-success" [routerLink]="['/login']">Login</a>
+</div>
+<!--Si logueado-->
+<div class="jumbotron" *ngIf="userIsLogged">
+    <h1 class="page-header">Welcome, USERNAME</h1>
+    <figure>
+      <img alt="The user avatar"/>
+    </figure>
+    <div class="summary">
+      <p>Level: 1</p>
+      <p>Score: 0</p>
+    </div>
 </div>

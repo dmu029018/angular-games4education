@@ -8,8 +8,8 @@ import { Component, OnInit, Input } from '@angular/core';
 export class HeaderComponent implements OnInit {
 
   @Input()
-  title: string;
-  subtitle: string;
+    title: string;
+    subtitle: string;
 
   constructor() { }
 

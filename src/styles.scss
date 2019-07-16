@@ -1,4 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Architects+Daughter|Orbitron&display=swap');
+
+
+* {
+  outline: none;
+}
 
 body {
   width: 100%;
@@ -6,5 +12,9 @@ body {
   box-sizing: border-box;
   margin: 0;
 
+  background-image: url("/assets/img/paper.jpg");
+
   /*fonts...*/
+  font-family: "Architects Daughter", cursive;
+  font-size: 24px;
 }

@@ -1,1 +1,40 @@
-<p>login works!</p>
+
+<ng-container *ngIf="isError">
+  <div class="card">
+    <div class="card-header">
+      Ooops! Form data error!
+    </div>
+    <div class="card-body">
+        <p>Oops! It seems form data is wrong:</p>
+        <ul>
+          <li>Email field must be a valid email (you know: xxxx...@xxx.xxx)</li>
+          <li>Password field must be... yeah, it must simply be</li>
+        </ul>
+    </div>
+  </div>
+</ng-container>
+
+<div class="card">
+  <div class="card-header">
+      <app-header title="Login"></app-header>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input class="form-control" #email placeholder="Your user email" type="email" [formControl]="loginForm.get('email')"/>
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input class="form-control" #password placeholder="Your password" type="password" [formControl]="loginForm.get('password')"/>
+      </div>
+      <div class="btn-group">
+          <button type="submit" class="btn btn-success">Login</button>
+          <a class="btn btn-warning" [routerLink]="['/home']">Go home</a>
+      </div>
+    </form>
+  </div>
+</div>
+<pre>
+    {{loginForm.value | json}}
+</pre>

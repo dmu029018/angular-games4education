@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  // Comprueba si el usuario está logueado
+  userIsLogged = false;
+  user = null;
+
   constructor() { }
 
   ngOnInit() {

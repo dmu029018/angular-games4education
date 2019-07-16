@@ -5,6 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CommonsModule } from './commons/commons.module';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from './shared/services/auth.service';
+import { ApiService } from './shared/services/api.service';
+import { FormBuilder } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,11 @@ import { HttpClientModule } from '@angular/common/http';
     CommonsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    ApiService,
+    FormBuilder
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
