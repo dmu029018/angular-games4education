@@ -17,7 +17,7 @@ export class GameDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe(p => this.identifier = p['id']);
-    this.game = this.apiService.findGameById(this.identifier);
+    this.apiService.getGame$(this.identifier).subscribe(g => this.game = g);
   }
 
 }

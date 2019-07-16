@@ -41,11 +41,11 @@ export class LoginComponent implements OnInit {
    * Se dispara asl enviar el formulario
    */
   onSubmit() {
-    console.log(this.loginForm.value);
     if (this.loginForm.invalid) {
       this.onIsError();
       return;
     }
+    console.log(this.loginForm.value);
 
     const userObs = this.authService.loginUser(this.email.value, this.password.value);
     return userObs.subscribe(

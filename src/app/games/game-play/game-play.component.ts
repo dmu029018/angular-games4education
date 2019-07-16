@@ -19,12 +19,13 @@ export class GamePlayComponent implements OnInit {
   maxTime: number = 0;
   gameIsRunning = false;
   gameInterval;
+  messageTimeout;
 
   constructor(private route: ActivatedRoute, private apiService: ApiService) { }
 
   ngOnInit() {
     this.route.params.subscribe(p => this.identifier = p['id']);
-    this.game = this.apiService.findGameById(this.identifier);
+    this.apiService.getGame$(this.identifier).subscribe(g => this.game = g);
   }
 
   button1click() {
@@ -63,19 +64,20 @@ export class GamePlayComponent implements OnInit {
   }
 
   showMessage(msg: string, ms?: number) {
-    clearTimeout();
+    clearTimeout(this.messageTimeout);
     this.message = msg;
     if (ms) {
-      setTimeout(() => {
+      this.messageTimeout = setTimeout(() => {
         this.message = '';
       }, ms);
     }
   }
 
-  gameOver() {
+  gameOver(cause?: string) {
     clearInterval(this.gameInterval);
-    this.showMessage("Game over");
     // Enviar puntuación
+
+    // Detener flujo de juego
     this.gameIsRunning = false;
   }
 

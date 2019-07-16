@@ -7,6 +7,7 @@ import { LoginComponent } from './users/login/login.component';
 import { RegisterComponent } from './users/register/register.component';
 import { GameDetailsComponent } from './games/game-details/game-details.component';
 import { GamePlayComponent } from './games/game-play/game-play.component';
+import { AuthGuard } from './shared/guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -20,15 +21,18 @@ const routes: Routes = [
   },
   {
     path: 'games',
-    component: GameListComponent
+    component: GameListComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'games/:id',
-    component: GameDetailsComponent
+    component: GameDetailsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'games/:id/play',
-    component: GamePlayComponent
+    component: GamePlayComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'login',

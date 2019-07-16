@@ -39,7 +39,6 @@ export class AuthService {
       {name, email, password},
       {headers: this.headers}
     );
-    console.log("response generated");
     return response.pipe(tap(data => {
       return data;
     }, catchError(error => {
@@ -57,10 +56,13 @@ export class AuthService {
   loginUser(email: string, password: string): Observable<any> {
     const URL = this.authURL + 'login';
     const response = this.http.post<UserInterface>(
-      this.authURL,
+      URL,
       { email, password },
       { headers: this.headers }
     );
+
+    console.log(response);
+
     return response.pipe(tap(data => {
       localStorage.setItem('isLogged', 'true');
       this.isUserLoggedIn.next(true);

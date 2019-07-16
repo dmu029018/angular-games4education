@@ -1,0 +1,18 @@
+{
+  "users": [
+    {
+      "email": "prueba@prueba.com",
+      "password": "$2a$10$LSQvsWHgRECowSNk8vbad.ojn703X8gfnyD9h62VPPywDH.o5At0i",
+      "name": "lololol",
+      "id": 1
+    }
+  ],
+  "games": [
+    {
+      "id": "123456789",
+      "name": "Clickbait",
+      "description": "A game for practising clicking. Honestly, this is more for boring and testing the application than for educational purposes..."
+    }
+  ],
+  "gameplays": []
+}

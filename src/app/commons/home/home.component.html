@@ -14,12 +14,22 @@
 </div>
 <!--Si logueado-->
 <div class="jumbotron" *ngIf="userIsLogged">
-    <h1 class="page-header">Welcome, USERNAME</h1>
-    <figure>
-      <img alt="The user avatar"/>
-    </figure>
-    <div class="summary">
-      <p>Level: 1</p>
-      <p>Score: 0</p>
+
+  <div class="card">
+    <div class="card-header">
+        <h1 class="page-header">Welcome, USERNAME</h1>
     </div>
+    <div class="card-body">
+      <figure>
+        <img src="assets/img/default-avatar.png" alt="The user avatar"/>
+      </figure>
+      <div class="summary">
+        <p>Level: 1</p>
+        <p>Score: 0</p>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer">
+      <button (click)="logout()">Logout</button>
+  </div>
 </div>

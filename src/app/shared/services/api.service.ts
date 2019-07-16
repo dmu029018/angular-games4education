@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { GAMES } from '../mock-data/games-mock';
 import { Game } from '../classes/game';
+import { environment } from 'src/environments/environment';
+import { Observable } from 'rxjs';
 
 
 @Injectable({
@@ -9,21 +11,17 @@ import { Game } from '../classes/game';
 })
 export class ApiService {
 
+  private apiURL = environment.API_URL;
 
   constructor(private http: HttpClient) { }
 
-  getGames$(): Game[] {
-    // Por ahora importaremos del mock data, pero se hará con una API
-    return GAMES;
+  getGames$() {
+
+    return this.http.get(this.apiURL + 'games');
   }
 
-  findGameById(identifier: string): Game {
-    for (let g of GAMES) {
-      if (g.id === identifier) {
-        return g;
-      }
-    }
-    return null;
+  getGame$(identifier: string) {
+    return this.http.get<Game>(this.apiURL + 'games/' + identifier);
   }
 
 }

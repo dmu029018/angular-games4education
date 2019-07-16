@@ -61,7 +61,9 @@ export class RegisterComponent implements OnInit {
    */
   onSubmit() {
     console.log(this.registerForm.value);
-    if (this.registerForm.invalid || this.password !== this.confirmPassword) {
+
+    console.log(this.password !== this.confirmPassword);
+    if (this.registerForm.invalid || this.password.value !== this.confirmPassword.value) {
       // Error de datos.
       this.onIsError();
       return;

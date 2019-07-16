@@ -1,26 +1,40 @@
+<div *ngIf="!gameIsRunning" class="init-modal">
+  <div class="container">
+    <div class="card text-center">
+      <div class="card-header">
+        Choose one option
+      </div>
+      <div class="card-body">
+        <div class="btn-group">
+        <button (click)="gameInit()" class="btn btn-success">Start game</button>
+        <a routerLink="/games/{{identifier}}" class="btn btn-info">Go to game details</a>
+        <a routerLink="/games" class="btn btn-info">Return to the list</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="card">
   <div class="card-header">
     <app-header title="Play game" [subtitle]="game.name"></app-header>
   </div>
   <div class="card-body d-flex flex-row justify-content-around align-items-center">
       <div class="game-panel">
-        <p>3 x 4</p>
+        <canvas #canvas style="width: 400px; height: 300px">
+
+        </canvas>
       </div>
       <div class="hud">
         <h3>Game stats</h3>
         <p>Score: <span class="text-primary">{{ score }}</span></p>
-        <p>Time:</p>
-        <p><ngb-progressbar type="info" [value]="time / maxTime * 100" [striped]="true" [animated]="true"><i></i></ngb-progressbar></p>
+        <p>Time: <span class="timebar"><div class="timebar-fill" [style.width.%]="time / maxTime * 100"></div></span></p>
+        <p>Grade: <span class="text-primary">N/A</span></p>
       </div>
   </div>
   <div class="card-footer">
     <div *ngIf="gameIsRunning" class="control-panel d-flex justify-content-around">
-      <button (click)="button1click()">Increase score</button>
-      <button (click)="button2click()">Show message</button>
-      <button (click)="button3click()">Game over</button>
-    </div>
-    <div *ngIf="!gameIsRunning" class="control-panel d-flex justify-content-around">
-      <button (click)="gameInit()">Start</button>
+      <button (click)="button1click()">Click as your life depends on it!!</button>
     </div>
   </div>
 </div>

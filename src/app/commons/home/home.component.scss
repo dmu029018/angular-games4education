@@ -1,0 +1,19 @@
+.card-body {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+  figure {
+
+    border: 3px outset #666;
+    width: fit-content;
+    height: fit-content;
+
+    img {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+}
