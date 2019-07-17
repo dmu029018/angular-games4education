@@ -12,6 +12,7 @@ export class AuthGuard implements CanActivate {
     if (this.authService.getToken()) {
       return true;
     } else {
+      alert("It's necessary to be logged in in order to play!!");
       this.router.navigate(['/login']);
       return false;
     }

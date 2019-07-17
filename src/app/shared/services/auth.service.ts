@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, throwError, Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, tap, catchError } from 'rxjs/operators';
-
 import { environment } from 'src/environments/environment';
-import { UserInterface } from '../interfaces/user.interface';
+import { User } from '../classes/user';
 
 @Injectable({
   providedIn: 'root'
@@ -32,12 +31,14 @@ export class AuthService {
    * @param email Email del usuario. Usado para identificar al usuario en el login.
    * @param password Contraseña de usuario (sin encriptar).
    */
-  registerUser(name: string, email: string, password: string): Observable<any> {
+  registerUser(nickname: string, email: string, password: string): Observable<any> {
     const URL = this.authURL + 'register';
-    const response = this.http.post<UserInterface>(
-      URL,
-      {name, email, password},
-      {headers: this.headers}
+    const user = new User(nickname, email, password);
+
+    const response = this.http.post<User>(
+      URL, user, {
+        headers: this.headers
+      }
     );
     return response.pipe(tap(data => {
       return data;
@@ -55,7 +56,7 @@ export class AuthService {
    */
   loginUser(email: string, password: string): Observable<any> {
     const URL = this.authURL + 'login';
-    const response = this.http.post<UserInterface>(
+    const response = this.http.post<User>(
       URL,
       { email, password },
       { headers: this.headers }
@@ -96,6 +97,23 @@ export class AuthService {
   logoutUser() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('isLogged');
+  }
+
+
+  /**
+   * Obtiene la referencia de usuario logueado
+   */
+  getLoggedUser() {
+    let user = JSON.parse(this.getToken());
+    console.log(user);
+    return user;
+    /*
+    const url = this.apiURL + 'users/data';
+    const response = this.http.get<User>(
+      URL, this.getToken(), {
+        headers: this.headers
+      }
+    );*/
   }
 
   /**

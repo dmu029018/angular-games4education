@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Game } from 'src/app/shared/classes/game';
+import { User } from 'src/app/shared/classes/user';
+import { Grade } from 'src/app/shared/enums/grade.enum';
 import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/shared/services/api.service';
 
@@ -12,20 +14,22 @@ export class GamePlayComponent implements OnInit {
 
   identifier: string;
   game: Game;
+  user: User;
 
   message: string = '';
   score: number = 0;
   time: number = 0;
   maxTime: number = 0;
+  grade: Grade;
   gameIsRunning = false;
   gameInterval;
   messageTimeout;
 
-  constructor(private route: ActivatedRoute, private apiService: ApiService) { }
+  constructor(private route: ActivatedRoute, private api: ApiService) { }
 
   ngOnInit() {
     this.route.params.subscribe(p => this.identifier = p['id']);
-    this.apiService.getGame$(this.identifier).subscribe(g => this.game = g);
+    this.api.getGame$(this.identifier).subscribe(g => this.game = g);
   }
 
   button1click() {
@@ -76,9 +80,17 @@ export class GamePlayComponent implements OnInit {
   gameOver(cause?: string) {
     clearInterval(this.gameInterval);
     // Enviar puntuación
-
+    this.reportScore();
     // Detener flujo de juego
     this.gameIsRunning = false;
   }
+
+  /**
+   * Envía los resultados de la partida al servidor.
+   */
+  reportScore() {
+    this.api.postGameplay$(this.game.id, this.user.id, this.score, this.grade);
+  }
+
 
 }

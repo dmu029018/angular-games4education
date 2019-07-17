@@ -39,9 +39,10 @@
         <label for="passwordconfirm">Confirm Password</label>
         <input class="form-control" #passwordconfirm placeholder="Your password (confirm)" type="password" [formControl]="registerForm.get('confirmPassword')"/>
       </div>
-      <div class="btn-group">
+      <div class="btn-group d-flex justify-content-center">
           <button type="submit" class="btn btn-success">Register</button>
           <a class="btn btn-warning" [routerLink]="['/home']">Go home</a>
+          <a class="btn btn-info" [routerLink]="['/login']">You already have an user??</a>
       </div>
     </form>
   </div>

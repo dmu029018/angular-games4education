@@ -5,19 +5,25 @@
 <app-header [title]="'Home'"></app-header>
 <!--Si no logueado:-->
 <div class="jumbotron text-center" *ngIf="!userIsLogged">
-  <h1  class="page-header">Welcome to <app-brand></app-brand>!!</h1>
-  <p>The platform transforming the education in a game!</p>
-  <p>Consider to register in order to enjoy it! It's free!!</p>
-  <a class="btn btn-info" [routerLink]="['/register']">Register</a>
-  <p>Or you already have an user? Then let's connect!!</p>
-  <a class="btn btn-success" [routerLink]="['/login']">Login</a>
+  <div class="card">
+    <div class="card-header">
+        <h1 class="page-header card-title">Welcome to <app-brand></app-brand>!!</h1>
+        <h2 class="card-subtitle text-muted">The platform transforming the education in a game!</h2>
+    </div>
+    <div class="card-body">
+      <p class="card-text">Consider to <a [routerLink]="['/register']">register</a> in order to enjoy it! It's free!!</p>
+      <p class="card-text">Or you already have an user? Then <a [routerLink]="['/login']">let's connect</a>!!</p>
+
+
+    </div>
+  </div>
 </div>
 <!--Si logueado-->
 <div class="jumbotron" *ngIf="userIsLogged">
 
   <div class="card">
     <div class="card-header">
-        <h1 class="page-header">Welcome, USERNAME</h1>
+        <h1 class="page-header card-title">Welcome, {{ user.nickname }}</h1>
     </div>
     <div class="card-body">
       <figure>
@@ -25,7 +31,7 @@
       </figure>
       <div class="summary">
         <p>Level: 1</p>
-        <p>Score: 0</p>
+        <p>Total score: {{ totalScore }}</p>
       </div>
     </div>
   </div>

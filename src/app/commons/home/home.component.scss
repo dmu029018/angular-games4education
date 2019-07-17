@@ -1,8 +1,9 @@
 .card-body {
 
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+
+  .page-header {
+    letter-spacing: 0.1em;
+  }
 
   figure {
 
