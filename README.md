@@ -1,5 +1,7 @@
 # Angular Games4education - RELEASE 1
 
+(slides: [I'm an inline-style link with title](https://https://slides.com/davidm-urena/deck "Aquí"))
+
 games4education es una plataforma de juegos educativos.
 
 Cuenta con juegos sencillos en interacción, con una curva de dificultad creciente, al principio muy ligera, pero que supone un desafío para los jugadores más hábiles.
