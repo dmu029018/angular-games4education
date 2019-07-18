@@ -27,6 +27,7 @@ Los módulos con los que cuenta la aplicación son los siguientes:
     + GameDetailsComponent (En vías de desarrollo, pero promete mucho)
     + GameListComponent (Todos los juegos a tu alcance a un solo click. Deasde aquí puedes ver detalles o ir a jugar directamente. En un futuro mostrará puntuación máxima y dispondrá de filtros)
     + GamePlay (La piedra angular de la aplicación. Sin este componente, no le interesaríamos a nadie. Aquí puedes jugar a los juegos)
++AppRoutingModule (Connecting People)
 
 Clases:    
 + Game (Modela a un juego. Tiene el link para poder acceder al script, entre otros campos meramente informativos)
