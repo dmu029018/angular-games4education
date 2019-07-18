@@ -45,8 +45,6 @@ export class LoginComponent implements OnInit {
       this.onIsError();
       return;
     }
-    console.log(this.loginForm.value);
-
     const userObs = this.authService.loginUser(this.email.value, this.password.value);
     return userObs.subscribe(
         data => {

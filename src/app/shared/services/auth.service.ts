@@ -26,7 +26,7 @@ export class AuthService {
   /**
    * Registra a un usuario.
    *
-   * @param name Nombre del usuario. Éste es el nombre con el cual se mostrará al usuario en la aplicación
+   * @param nickname Nombre del usuario. Éste es el nombre con el cual se mostrará al usuario en la aplicación
    *              al resto de usuarios y a él mismo.
    * @param email Email del usuario. Usado para identificar al usuario en el login.
    * @param password Contraseña de usuario (sin encriptar).
@@ -61,10 +61,7 @@ export class AuthService {
       { email, password },
       { headers: this.headers }
     );
-
-    console.log(response);
-
-    return response.pipe(tap(data => {
+    const obs = response.pipe(tap(data => {
       localStorage.setItem('isLogged', 'true');
       this.isUserLoggedIn.next(true);
       return data;
@@ -72,6 +69,13 @@ export class AuthService {
       console.log(error);
       return throwError(error);
     }));
+    this.http.get<User>(this.authURL + 'users?email=' + email)
+      .subscribe((u: User) => {
+        // Obtener ID de usuario
+        const id = u[0].id;
+        localStorage.setItem('ident', id);
+      });
+    return obs;
   }
 
   /**
@@ -97,23 +101,7 @@ export class AuthService {
   logoutUser() {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('isLogged');
-  }
-
-
-  /**
-   * Obtiene la referencia de usuario logueado
-   */
-  getLoggedUser() {
-    let user = JSON.parse(this.getToken());
-    console.log(user);
-    return user;
-    /*
-    const url = this.apiURL + 'users/data';
-    const response = this.http.get<User>(
-      URL, this.getToken(), {
-        headers: this.headers
-      }
-    );*/
+    localStorage.removeItem('ident');
   }
 
   /**

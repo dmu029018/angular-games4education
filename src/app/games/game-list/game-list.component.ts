@@ -10,11 +10,10 @@ import { ApiService } from 'src/app/shared/services/api.service';
 })
 export class GameListComponent implements OnInit {
 
-  games: any;
+  games: Game[];
 
   constructor(private api: ApiService) {
-    this.games = this.api.getGames$().subscribe(g => this.games = g);
-    console.log(this.games);
+    this.api.getGames$().subscribe((g: Game[]) => this.games = g);
   }
 
   ngOnInit() {

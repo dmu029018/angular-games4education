@@ -1,77 +1,128 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { GAMES } from '../mock-data/games-mock';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Game } from '../classes/game';
 import { environment } from 'src/environments/environment';
 import { GamePlay } from '../classes/game-play';
 import { User } from '../classes/user';
-import { GAMEPLAYS } from '../mock-data/gameplays-mock';
+import { tap, catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
 
+  /**
+   * URL base de la API. Viene dada por el entorno.
+   */
   private apiURL = environment.API_URL;
 
+  /**
+   * Cabeceras HTTP
+   */
+  headers: HttpHeaders = new HttpHeaders({
+    'Content-Type': 'application/json'
+  });
+
+  /**
+   * Constructor
+   */
   constructor(private http: HttpClient) { }
 
   // GAMES
 
+  /**
+   * Obtiene todos los juegos existentes.
+   */
   getGames$() {
-
-    return this.http.get(this.apiURL + 'games');
+    return this.http.get<Game[]>(this.apiURL + 'games');
   }
 
+  /**
+   * Obtiene una instancia de juego dado su identificador.
+   *
+   * @param identifier Identificador de juego
+   */
   getGame$(identifier: string) {
     return this.http.get<Game>(this.apiURL + 'games/' + identifier);
   }
 
   // USER DATA
 
-  getUserData$(identifier: string) {
-    return this.http.get<User>(this.apiURL + 'users/' + identifier);
+  /**
+   * Obtiene la referencia de usuario logueado
+   */
+  getLoggedUser$() {
+    return this.getUserData$(localStorage.getItem('ident'));
   }
 
-
-  // IMPLEMENT
+  /**
+   * Obtiene datos de usuario a partir de su id
+   *
+   * @param identifier Identificador de usuario
+   */
+  getUserData$(identifier: string) {
+    return this.http.get<User>(this.apiURL + 'users?id=' + identifier);
+  }
 
   // GAMEPLAY
 
-
-  postGameplay$(gameId, userId, score, grade) {
-    const gameplay: GamePlay = new GamePlay(gameId, userId, score, grade);
-
+  /**
+   * Añade un registro de partida a la base de datos.
+   *
+   * @param gameplay Instancia de gameplay de la partida
+   */
+  postGameplay$(gameplay: GamePlay) {
+    const url = this.apiURL + 'gameplays/';
+    return this.http.post<GamePlay>(url, gameplay, {
+      headers: this.headers
+    }).pipe(tap((gp: GamePlay) => {
+      console.log(`added gameplay: id=${gp.id}`);
+    }), catchError(error => {
+      console.log(error);
+      return throwError(error);
+    }));
   }
 
-  getGameplay$() {
-
-    //return this.http.get(this.apiURL + 'gameplays');
+  /**
+   * Obtiene un gameplay con un identificador determinado.
+   *
+   * @param ident Identificador del gameplay
+   */
+  getGameplay$(ident: string) {
+    return this.http.get<GamePlay>(this.apiURL + 'gameplays?id=' + ident);
   }
 
-  getGameplays$(identifier: string) {
-
-    //return this.http.get<GamePlay>(this.apiURL + 'gameplays/' + identifier);
+  /**
+   * Obtiene todos los gameplays existentes.
+   */
+  getGameplays$() {
+    return this.http.get<GamePlay[]>(this.apiURL + 'gameplays/');
   }
 
+  /**
+   * Obtiene todos los gameplays de un juego.
+   *
+   * @param userIdent Identificador de usuario.
+   */
   getGameplays4game$(gameIdent: string) {
-    return GAMEPLAYS.filter(gp => gp.gameId === gameIdent);
+    return this.http.get<GamePlay[]>(this.apiURL + 'gameplays?gameId=' + gameIdent);
   }
 
+  /**
+   * Obtiene todos los gameplays de un usuario.
+   *
+   * @param userIdent Identificador de usuario.
+   */
   getGameplays4user$(userIdent: string) {
-    console.log(userIdent);
-
-    return GAMEPLAYS.filter(gp => gp.userId === userIdent);
-    //return this.http.get<Game>(this.apiURL + 'games/' + identifier);
+    return this.http.get<GamePlay[]>(this.apiURL + 'gameplays?userId=' + userIdent);
   }
 
-  getBestGameplay4game$(gameIdent: string) {
-    const gameplays = GAMEPLAYS.filter(gp => gp.gameId === gameIdent);
-    Math.max.apply(Math, gameplays.map(gp => gp));
+  /**
+   * Obtiene todos los gameplays de un usuario dado para un juego dado.
+   */
+  getGameplays4gameAnd4user$(gameIdent: string, userIdent: string) {
+    return this.http.get<GamePlay[]>(this.apiURL + 'gameplays?gameId=' + gameIdent + '&userId=' + userIdent);
   }
 
-
-  getBestGameplay4gameAndPlayer$(gameIdent: string, playerIdent) {
-
-  }
 }

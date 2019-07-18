@@ -3,6 +3,7 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 import { Router } from '@angular/router';
 import { ApiService } from 'src/app/shared/services/api.service';
 import { User } from 'src/app/shared/classes/user';
+import { GamePlay } from 'src/app/shared/classes/game-play';
 
 @Component({
   selector: 'app-home',
@@ -13,38 +14,52 @@ export class HomeComponent implements OnInit {
 
   // Comprueba si el usuario está logueado
   userIsLogged;
-  user = null;
+  // Usuario vacío para inicializar sin errores.
+  // No tiene nada que ver con un usuario conectado a la aplicación
+  user = new User('', '', '');
+  gameplays: GamePlay[];
   totalScore = 0;
 
-  constructor(private auth: AuthService, private api: ApiService, private router: Router) {
-    this.userIsLogged = auth.isLogged();
+  /**
+   * Constructor
+   *
+   * @param auth Servicio de autenticación
+   * @param api API de datos
+   * @param router Ruteador
+   */
+  constructor(private auth: AuthService, private api: ApiService, private router: Router) {}
+
+  /**
+   * Inicialización del componente
+   */
+  ngOnInit() {
+    this.userIsLogged = this.auth.isLogged();
     if (this.userIsLogged) {
-      // Simula la obtención de un usuario
+      this.api.getLoggedUser$().subscribe((u: User) => {
+        this.user = u[0];
+      });
 
-      /*
-      this.user = auth.getLoggedUser();
-      this.user = new User("PruebaNickname", "PruebaEmail", "PruebaPassword", '12345');
-      this.user.setId('12345');
-
-      this.totalScore = this.getUserTotalScore();
-      */
-
-      this.user = auth.getLoggedUser();
+      this.updateGameplayInfo();
     }
   }
 
-  ngOnInit() {
-  }
-
+  /**
+   * Acciones al pulsar el botón de desconexión.
+   */
   logout() {
     this.auth.logoutUser();
     this.userIsLogged = false;
     this.router.navigate(['/home']);
   }
 
-  getUserTotalScore() {
-    const gamePlays = this.api.getGameplays4user$(this.user.getId());
-    return gamePlays.reduce((score, gp) => score + gp.score, 0);
+  /**
+   * Obtiene la información de las partidas del jugador y calcula su puntuación
+   */
+  updateGameplayInfo() {
+    this.api.getGameplays4user$(localStorage.getItem('ident')).subscribe((gps: GamePlay[]) => {
+      this.gameplays = gps;
+      this.totalScore = this.gameplays.reduce((score, gp) => score + gp.score, 0);
+    });
   }
 
 }

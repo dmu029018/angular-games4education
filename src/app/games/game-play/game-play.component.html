@@ -2,7 +2,11 @@
   <div class="container">
     <div class="card text-center">
       <div class="card-header">
-        Choose one option
+        <ng-container *ngIf="!firstTime">
+          <h2>Game over</h2>
+          <p>Your score: {{ gamePlay.score }}</p>
+        </ng-container>
+        Choose an option
       </div>
       <div class="card-body">
         <div class="btn-group">
@@ -21,20 +25,20 @@
   </div>
   <div class="card-body d-flex flex-row justify-content-around align-items-center">
       <div class="game-panel">
-        <canvas #canvas style="width: 400px; height: 300px">
-
-        </canvas>
+        <span class="textbox">{{ gameBehavior.renderText }}</span>
       </div>
       <div class="hud">
         <h3>Game stats</h3>
-        <p>Score: <span class="text-primary">{{ score }}</span></p>
-        <p>Time: <span class="timebar"><div class="timebar-fill" [style.width.%]="time / maxTime * 100"></div></span></p>
-        <p>Grade: <span class="text-primary">N/A</span></p>
+        <p>Score: <span class="text-primary">{{ gamePlay.score }}</span></p>
+        <p>Time: <span class="timebar"><div class="timebar-fill" [style.width.%]="gameBehavior.currentTime / gameBehavior.maxTime * 100"></div></span></p>
+        <p>Grade: <span class="text-primary">{{ gamePlay.grade }}</span></p>
       </div>
   </div>
   <div class="card-footer">
-    <div *ngIf="gameIsRunning" class="control-panel d-flex justify-content-around">
-      <button (click)="button1click()">Click as your life depends on it!!</button>
+    <div *ngIf="gameIsRunning" >
+      <div class="control-panel d-flex justify-content-around">
+        <button *ngFor="let c of gameBehavior.gameControls" [ngClass]="c.classes" (click)="gameBehavior.callMethod([c.onClick])">{{ c.label }}</button>
+      </div>
     </div>
   </div>
 </div>

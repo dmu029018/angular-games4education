@@ -60,9 +60,6 @@ export class RegisterComponent implements OnInit {
    * Se ejeuta al enviar el formulario
    */
   onSubmit() {
-    console.log(this.registerForm.value);
-
-    console.log(this.password !== this.confirmPassword);
     if (this.registerForm.invalid || this.password.value !== this.confirmPassword.value) {
       // Error de datos.
       this.onIsError();

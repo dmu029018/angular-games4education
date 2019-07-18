@@ -1,26 +1,14 @@
-import * as moment from 'moment';
-
 export class User {
 
   id: string;
   nickname: string;
   email: string;
   password: string;
-  admin = false;
-  signUpDate: string;
 
-  constructor(nickname: string, email: string, password: string, id?: string) {
-    this.signUpDate = moment().format();
-    if (!id) {
-      this.generateId();
-    }
+  constructor(nickname: string, email: string, password: string) {
     this.nickname = nickname;
     this.email = email;
     this.password = password;
-  }
-
-  generateId() {
-    this.id = ((this.signUpDate as any) * (Math.random() + 1)) + '';
   }
 
   getId() {
@@ -35,20 +23,8 @@ export class User {
     return this.email;
   }
 
-  getSignUpDate() {
-    return this.signUpDate;
-  }
-
   getPassword() {
     return this.password;
-  }
-
-  isAdmin() {
-    return this.admin || false;
-  }
-
-  setId(id: string) {
-    this.id = id;
   }
 
   setNickname(nickname: string) {
@@ -63,13 +39,6 @@ export class User {
     this.password = password;
   }
 
-  setSignUpDate(signUpDate: string) {
-    this.signUpDate = signUpDate;
-  }
-
-  setAdmin(admin: boolean) {
-    this.admin = admin;
-  }
 }
 
 

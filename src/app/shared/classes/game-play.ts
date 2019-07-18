@@ -20,9 +20,9 @@ export class GamePlay {
   }
 
   generateId() {
-    this.id = HashService.generateHash(this.dateTime).toString(16)
-            + HashService.generateHash(this.userId).toString(16)
-            + HashService.generateHash(this.gameId).toString(16);
+    this.id = HashService.generateHash(this.dateTime + '').toString(16)
+            + HashService.generateHash(this.userId + '').toString(16)
+            + HashService.generateHash(this.gameId + '').toString(16);
   }
 
 }
