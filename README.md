@@ -1,6 +1,6 @@
 # Angular Games4education - RELEASE 1
 
-(slides: [I'm an inline-style link with title](https://https://slides.com/davidm-urena/deck "Aquí"))
+(slides: [Sigue el link](https://https://slides.com/davidm-urena/deck "Sí, aquí"))
 
 games4education es una plataforma de juegos educativos.
 
