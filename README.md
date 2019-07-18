@@ -27,19 +27,19 @@ Los módulos con los que cuenta la aplicación son los siguientes:
     + GamePlay (La piedra angular de la aplicación. Sin este componente, no le interesaríamos a nadie. Aquí puedes jugar a los juegos)
 
 Clases:
-    + Game (Modela a un juego. Tiene el link para poder acceder al script, entre otros campos meramente informativos)
-    + GamePlay (Contiene la información de las partidas, y de quién, cuándo y qué ha jugado. Muchos metadatos salen de aquí)
-    + GameBehavior (Sin él, GamePlayComponent no molaría tanto. Loss scripts que cargan los juegos crean objetos de este tipo. Pura magia, verdad?)
-    + User (Toda aplicación que se precie debe tener usuarios. Facilita mucho el logueo y registro, la verdad)
++ Game (Modela a un juego. Tiene el link para poder acceder al script, entre otros campos meramente informativos)
++ GamePlay (Contiene la información de las partidas, y de quién, cuándo y qué ha jugado. Muchos metadatos salen de aquí)
++ GameBehavior (Sin él, GamePlayComponent no molaría tanto. Loss scripts que cargan los juegos crean objetos de este tipo. Pura magia, verdad?)
++ User (Toda aplicación que se precie debe tener usuarios. Facilita mucho el logueo y registro, la verdad)
 Enumeradores:
-    + Grade (La calificación de las partidas determina la curva de dificultad y también mide directamente el éxito de los jugadores)
++ Grade (La calificación de las partidas determina la curva de dificultad y también mide directamente el éxito de los jugadores)
 Guardias:
-    + AuthGuard (El portero de discoteca que impide pasar a los usuarios sin usuario y los envía amablemente donde necesitan)
++ AuthGuard (El portero de discoteca que impide pasar a los usuarios sin usuario y los envía amablemente donde necesitan)
 Servicios
-    + ApiService (Si la información es poder, es muy, muy poderoso. Obtiene los datos de donde sea)
-    + AuthService (Ayuda a los usuarios a encontrar su lugar aquí, dándoles la más cálida de las acogidas)
-    + FactoryService (Forma un gran equipo con GamePlay al proveerle del GameBehavior que necesita en cada momento. Y en un futuro ampliará horizontes)
-    + HashService (Nadie sabe mucho de él. Quizá es consecuencia de que sepa guardar bien los secretos)
++ ApiService (Si la información es poder, es muy, muy poderoso. Obtiene los datos de donde sea)
++ AuthService (Ayuda a los usuarios a encontrar su lugar aquí, dándoles la más cálida de las acogidas)
++ FactoryService (Forma un gran equipo con GamePlay al proveerle del GameBehavior que necesita en cada momento. Y en un futuro ampliará horizontes)
++ HashService (Nadie sabe mucho de él. Quizá es consecuencia de que sepa guardar bien los secretos)
     
     
     
