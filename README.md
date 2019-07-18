@@ -31,11 +31,11 @@ Clases:
 + GamePlay (Contiene la información de las partidas, y de quién, cuándo y qué ha jugado. Muchos metadatos salen de aquí)
 + GameBehavior (Sin él, GamePlayComponent no molaría tanto. Loss scripts que cargan los juegos crean objetos de este tipo. Pura magia, verdad?)
 + User (Toda aplicación que se precie debe tener usuarios. Facilita mucho el logueo y registro, la verdad)
-Enumeradores:
+Enumeradores:  
 + Grade (La calificación de las partidas determina la curva de dificultad y también mide directamente el éxito de los jugadores)
-Guardias:
+Guardias:  
 + AuthGuard (El portero de discoteca que impide pasar a los usuarios sin usuario y los envía amablemente donde necesitan)
-Servicios
+Servicios:  
 + ApiService (Si la información es poder, es muy, muy poderoso. Obtiene los datos de donde sea)
 + AuthService (Ayuda a los usuarios a encontrar su lugar aquí, dándoles la más cálida de las acogidas)
 + FactoryService (Forma un gran equipo con GamePlay al proveerle del GameBehavior que necesita en cada momento. Y en un futuro ampliará horizontes)
