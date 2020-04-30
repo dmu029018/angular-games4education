@@ -21,7 +21,7 @@
     "@angular/router": "~8.0.1",
     "bcrypt": "^3.0.6",
     "bootstrap": "^4.3.1",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment": "^2.24.0",
     "ng-bootstrap": "^1.6.3",
     "rxjs": "~6.4.0",
